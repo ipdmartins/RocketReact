@@ -1,0 +1,28 @@
+.wrapper {
+  max-width: 70rem;
+  margin: 2rem auto;
+  /*2rem (em cima e embaixo, auto (laterais)*/
+  padding: 0 1rem;
+
+  display: grid;
+  grid-template-columns: 256px 1fr;
+  /*256px (fixo no sidebar, 1fr(ajusta o conteudo
+  com o tamanho da tela em uma coluna, flexivel)*/
+  gap: 2rem;
+  /*espaço entre as colunas*/
+  align-items: flex-start;
+  /*coloca as duas colunas no topo, respeitando o tamanho de cada
+  o padrao é stretch, onde as duas tem a mesma altura*/
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 87.5%; /*reduz o tamanho de tudo para mobile*/
+  }
+
+  /*Quando a tela for menor que 768*/
+  .wrapper {
+    grid-template-columns: 1fr;
+    /*estabelece uma coluna para tudo*/
+  }
+}
