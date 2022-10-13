@@ -48,7 +48,7 @@ const BaseInput = styled.input`
   }
 `;
 
-export const TtaskInput = styled(BaseInput)`
+export const TaskInput = styled(BaseInput)`
   //3 props(1 ou 0): flexgrow (pode crescer além do tamanho dele?). Flextrim (pode
   //diminuir o tamanho dele?). Flexbase (qual o tamanho ideal). Então flex:1 adapta
   //o componte no espaço que ele tiver disponível.
