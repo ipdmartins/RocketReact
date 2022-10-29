@@ -1,3 +1,4 @@
+import { produce } from "immer";
 import { actionTypes } from "./actions";
 
 export interface Cycle {
@@ -17,35 +18,36 @@ interface CyclesState {
 export function cyclesReducer(state: CyclesState, action: any) {
   switch (action.type) {
     case actionTypes.ADD_NEW_CYCLE:
-      return {
-        ...state,
-        cycles: [...state.cycles, action.payload.newCycle],
-        activeCycleId: action.payload.newCycle.id,
-      };
-    case actionTypes.INTERRUPT_CURRENT_CYCLE:
-      return {
-        ...state,
-        cycles: state.cycles.map((cycle) => {
-          if (cycle.id === state.activeCycleId) {
-            return { ...cycle, interruptedDate: new Date() };
-          } else {
-            return cycle;
-          }
-        }),
-        activeCycleId: null,
-      };
-    case actionTypes.MARK_CURRENT_CYCLE_AS_FINISHED:
-      return {
-        ...state,
-        cycles: state.cycles.map((cycle) => {
-          if (cycle.id === state.activeCycleId) {
-            return { ...cycle, finishedDate: new Date() };
-          } else {
-            return cycle;
-          }
-        }),
-        activeCycleId: null,
-      };
+      // o immer faz o papel de maps e outras dados mais complexos, reduz a quantidade
+      // de código mantendo a imutabilidade dos componentes.
+      return produce(state, (draft) => {
+        draft.cycles.push(action.payload.newCycle);
+        draft.activeCycleId = action.payload.newCycle.id;
+      });
+    case actionTypes.INTERRUPT_CURRENT_CYCLE: {
+      const currrentCycleIndex = state.cycles.findIndex((cycle) => {
+        return cycle.id === state.activeCycleId;
+      });
+      if (currrentCycleIndex < 0) {
+        return state;
+      }
+      return produce(state, (draft) => {
+        draft.activeCycleId = null;
+        draft.cycles[currrentCycleIndex].interruptedDate = new Date();
+      });
+    }
+    case actionTypes.MARK_CURRENT_CYCLE_AS_FINISHED: {
+      const currrentCycleIndex = state.cycles.findIndex((cycle) => {
+        return cycle.id === state.activeCycleId;
+      });
+      if (currrentCycleIndex < 0) {
+        return state;
+      }
+      return produce(state, (draft) => {
+        draft.activeCycleId = null;
+        draft.cycles[currrentCycleIndex].finishedDate = new Date();
+      });
+    }
     default:
       return state;
   }
