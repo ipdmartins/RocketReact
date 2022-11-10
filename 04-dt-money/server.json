@@ -1,0 +1,44 @@
+{
+  "transactions": [
+    {
+      "id": 1,
+      "description": "Software developer",
+      "type": "income",
+      "price": 5000,
+      "category": "Salary",
+      "createdAt": "Fri Nov 04 2022 22:54:06 GMT-0400"
+    },
+    {
+      "id": 2,
+      "description": "Mercado",
+      "type": "outcome",
+      "price": 50,
+      "category": "frutas",
+      "createdAt": "Fri Nov 04 2022 18:54:06 GMT-0400"
+    },
+    {
+      "category": "UQAC",
+      "description": "teste",
+      "price": "12",
+      "type": "income",
+      "createdAt": "2022-11-09T13:12:32.212Z",
+      "id": 3
+    },
+    {
+      "category": "UQAC",
+      "description": "teste 2",
+      "price": 145,
+      "type": "income",
+      "createdAt": "2022-11-09T13:18:24.234Z",
+      "id": 4
+    },
+    {
+      "category": "Super C",
+      "description": "Iogurte",
+      "price": 5,
+      "type": "outcome",
+      "createdAt": "2022-11-09T14:03:41.049Z",
+      "id": 5
+    }
+  ]
+}
