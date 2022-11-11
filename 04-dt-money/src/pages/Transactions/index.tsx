@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContextSelector } from "use-context-selector";
 import { Header } from "../../components/Header";
 import { SearchForm } from "../../components/SearchForm";
 import { Summary } from "../../components/Summary";
@@ -11,7 +11,10 @@ import {
 } from "./styles";
 
 export function Transactions() {
-  const { transactions } = useContext(TransactionContext);
+  //changed original React useContext to the library use-context-selector
+  const transactions = useContextSelector(TransactionContext, (context) => {
+    return context.transactions;
+  });
 
   return (
     <div>
